@@ -1,0 +1,114 @@
+/* remove default margin and padding from whole document */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* declare global colors */
+:root {
+    --header-text: hsl(205, 73%, 18%);
+    --body-text: hsl(205, 100%, 10%);
+    --background-color: hsl(180, 1%, 75%);
+    --highlight-color: rgb(141, 141, 141);
+    --button-color: hsl(300, 97%, 15%);
+    --button-hover-color: rgb(185, 3, 185);
+    --link-color: rgb(127, 5, 151);
+    --link-hover-color: rgb(210, 8, 250);
+    --box-background-color: hsl(300, 16%, 41%);
+}
+
+html, body {
+    background-color: var(--background-color);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    align-content: flex-start;
+    background: var(--background-color);
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 2vw;
+    margin-right: 2.5vw;
+}
+
+nav aside {
+    font-size: 24px;
+}
+
+#high-score {
+    color: var(--link-color);
+}
+
+#timer {
+    color: var(--body-text);
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: 4vw;
+}
+
+main section {
+    display: flex;
+    flex-direction: column;
+}
+
+main section button{
+    width: 20%;
+    align-self: center;
+    height: 3vw;
+    border: none;
+    background-color: var(--button-color);
+    border-radius: 25px;
+    font-size: 22px;
+    line-height: 22px;
+    margin: 16px 16px 16px 20px;
+    padding: 14px 34px;
+    text-align: center;
+    cursor: pointer;
+    color:whitesmoke;
+}
+
+section h2 {
+    align-self: center;
+    margin-bottom: 2em;
+    font-size: 48px;
+    color: var(--header-text);
+}
+
+section article {
+    align-self: center;
+    width: 60%;
+    margin-bottom: 2em;
+    font-size: 30px;
+    color: var(--body-text);
+}
+
+footer {
+    flex-shrink: 0;
+    background-color: var(--highlight-color);
+}
+
+footer nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 1em;
+    margin-right: 1.5em;
+}
+
+#visit-me a {
+    color: var(--link-color);
+}
+
+#visit-me a:hover {
+    color: var(--link-hover-color);
+}
