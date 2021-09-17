@@ -12,18 +12,50 @@
 <body>
     <header id="page-top">
         <nav id="nav-bar">
-            <aside id="high-score">View High Scores</aside>
+            <input type="button" id="btn-high-score" value="View High Scores">
             <aside id="timer" class="timer">Time: </aside>
         </nav>
     </header>
     <main id="quiz-body">
-        <section id="quiz-card">
-            <h2 id="quiz-title">Quiz Quiz Go! - Javascript Edition</h2>
-            <article id="intro-text">
+        <section id="quiz-intro-card">
+            <h2 id="quiz-into-title">Quiz Quiz Go! - Javascript Edition</h2>
+            <h3>
                 Test your knowledge of Javascript with this fun quiz! Answer all the questions within the time limit.
                 Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+            </h3>
+            <button type="button" id="start-quiz" class="button-format">Start Quiz</button>
+        </section>
+        <section id="quiz-card">
+            <h2 id="quiz-title">Question</h2>
+            <div id="button-group">
+                <button type="button" id="ans1" class="button-format">Answer 1</button>
+                <button type="button" id="ans2" class="button-format">Answer 2</button>
+                <button type="button" id="ans3" class="button-format">Answer 3</button>
+                <button type="button" id="ans4" class="button-format">Answer 4</button>
+            </div>
+            <label>Result</label>
+        </section>
+        <section id="quiz-end">
+            <h2 id="end-title">All done!</h2>
+            <h3 id="end-text">Your final score is 22.</h3>
+            <article id="end-wrapper">
+                <label for="initials-box">Enter initials:</label>
+                <input type="text" id="intials-box">
+                <input type="button" id="initials-submit" value="Submit" class="button-format">
             </article>
-            <button type="button" id="start-quiz">Start Quiz</button>
+        </section>
+        <section id="quiz-scores">
+            <h2 id="scores-title">High Scores</h2>
+            <article id="scores-box">
+                <ul id="scores-list">
+                    <li>Test lol</li>
+                </ul>
+            </article>
+            <div id="end-button-container">
+                <input type="button" id="end-go-back" value="Go Back" class="button-format">
+                <input type="button" id="end-clear" value="Clear High Score" class="button-format">
+            </div>
+
         </section>
     </main>
     <footer id="page-bottom">
