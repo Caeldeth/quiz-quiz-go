@@ -1,28 +1,28 @@
 // define questions and answers
 const quizQuestions = [
     {
-        question: "Test Question 1",
-        answers: ["TQ1 Answer 1", "TQ1 Answer 2", "TQ1 Answer 3", "TQ1 Answer 4"],
+        question: "Javascript is how many years old as of June 2021?",
+        answers: ["6 years", "24 years", "25 years", "30 years"],
         correctAnswer: "c",
     },
     {
-        question: "Test Question 2",
-        answers: ["TQ2 Answer 1", "TQ2 Answer 2", "TQ2 Answer 3", "TQ2 Answer 4"],
+        question: "This is not a valid Javascript file extension:",
+        answers: [".jav", ".js", ".cjs", ".mjs"],
         correctAnswer: "a",
     },
     {
-        question: "Test Question 3",
-        answers: ["TQ3 Answer 1", "TQ3 Answer 2", "TQ3 Answer 3", "TQ4 Answer 4"],
+        question: "Brendan Eich worked for this company while developing Javascript",
+        answers: ["Netscape", "Mozilla", "Google", "Opera Software"],
         correctAnswer: "a",
     },
     {
-        question: "Test Question 4",
-        answers: ["TQ4 Answer 1", "TQ4 Answer 2", "TQ4 Answer 3", "TQ4 Answer 4"],
+        question: "Javascript is trademarked by this company",
+        answers: ["Microsoft", "Sun Microsystems", "IBM", "Oracle"],
         correctAnswer: "d",
     },
     {
-        question: "Test Question 5",
-        answers: ["TQ5 Answer 1", "TQ5 Answer 2", "TQ5 Answer 3", "TQ4 Answer 4"],
+        question: "Javascript does not work in this operating system",
+        answers: ["Microsoft Windows", "Temple OS", "Linux", "OSX"],
         correctAnswer: "b",
     },
 ];
