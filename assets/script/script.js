@@ -1,64 +1,34 @@
 // define questions and answers
 const quizQuestions = [
     {
-        testIndex: 1,
         question: "Test Question 1",
-        answers: {
-            a: "TQ1 Answer 1",
-            b: "TQ1 Answer 2",
-            c: "TQ1 Answer 3",
-            d: "TQ1 Answer 4",
-        },
+        answers: ["TQ1 Answer 1", "TQ1 Answer 2", "TQ1 Answer 3", "TQ1 Answer 4"],
         correctAnswer: "c",
     },
     {
-        testIndex: 2,
         question: "Test Question 2",
-        answers: {
-            a: "TQ2 Answer 1",
-            b: "TQ2 Answer 2",
-            c: "TQ2 Answer 3",
-            d: "TQ2 Answer 4",
-        },
+        answers: ["TQ2 Answer 1", "TQ2 Answer 2", "TQ2 Answer 3", "TQ2 Answer 4"],
         correctAnswer: "a",
     },
     {
-        testIndex: 3,
         question: "Test Question 3",
-        answers: {
-            a: "TQ3 Answer 1",
-            b: "TQ3 Answer 2",
-            c: "TQ3 Answer 3",
-            d: "TQ3 Answer 4",
-        },
+        answers: ["TQ3 Answer 1", "TQ3 Answer 2", "TQ3 Answer 3", "TQ4 Answer 4"],
         correctAnswer: "a",
     },
     {
-        testIndex: 4,
         question: "Test Question 4",
-        answers: {
-            a: "TQ4 Answer 1",
-            b: "TQ4 Answer 2",
-            c: "TQ4 Answer 3",
-            d: "TQ4 Answer 4",
-        },
+        answers: ["TQ4 Answer 1", "TQ4 Answer 2", "TQ4 Answer 3", "TQ4 Answer 4"],
         correctAnswer: "d",
     },
     {
-        testIndex: 5,
         question: "Test Question 5",
-        answers: {
-            a: "TQ5 Answer 1",
-            b: "TQ5 Answer 2",
-            c: "TQ5 Answer 3",
-            d: "TQ5 Answer 4",
-        },
+        answers: ["TQ5 Answer 1", "TQ5 Answer 2", "TQ5 Answer 3", "TQ4 Answer 4"],
         correctAnswer: "b",
     },
 ];
 
 // variables to keep track of quiz in progress
-var currentQuestion = 0;
+var curQuestionIndex = 0;
 var time = quizQuestions.length * 15;
 var timerVal;
 
@@ -85,18 +55,23 @@ var lblEndScore = document.getElementById("end-text");
 var lblTimer = document.getElementById("timer-value");
 var boxTimer = document.getElementById("timer-container");
 var lblQuestion = document.getElementById("quiz-title");
+var lblOutcome = document.getElementById("quiz-outcome");
+var txtInitials = document.getElementById("initials-box");
 
 function startQuiz() {
-    // hide intro "page"
-    pageMainSection.style.display = pageMainSection.style.display === "none" ? "flex" : "flex";
     // show quiz "page"
+    pageMainSection.style.display = pageMainSection.style.display === "none" ? "flex" : "flex";
+    // make sure other pages are hidden
     pageIntroSection.style.display = pageIntroSection.style.display === "flex" ? "none" : "none";
+    pageEndQuiz.style.display = pageEndQuiz.style.display === "flex" ? "none" : "none";
+    pageHighScores.style.display = pageHighScores.style.display === "flex" ? "none" : "none";
+
     // disable high score button to prevent exiting game
     btnHighScore.disabled = true;
     // create timer - 1000 will run it every 1 second
-    timerVal = setInterval(timer, 1000); 
+    timerVal = setInterval(timer, 1000);
     // show starting time
-    lblTimer.innerHTML = time
+    lblTimer.innerHTML = time;
     // get questions
     popQuiz();
 }
@@ -108,25 +83,175 @@ function timer() {
     lblTimer.innerHTML = time;
 
     // expire game if person takes too long
-    if (time <=0) {
+    if (time <= 0) {
         gameOver();
     }
 }
 
 // create questions
 function popQuiz() {
+    // populate questions from array
+    var curQuestion = quizQuestions[curQuestionIndex];
+
+    // change title to current question
+    lblQuestion.innerHTML = curQuestion.question;
+
+    // clear prior questions
+    boxButtons.innerHTML = "";
+
+    // create a loop to add buttons and/or hang myself with
+    curQuestion.answers.forEach(function (answer, i) {
+        var quizButton = document.createElement("button");
+        quizButton.setAttribute("class", "question-buttons");
+        quizButton.setAttribute("value", answer);
+        quizButton.innerHTML = i + 1 + ". " + answer;
+        quizButton.onclick = answerClick;
+
+        boxButtons.appendChild(quizButton);
+    });
+}
+
+function answerClick() {
+    // check if user guessed wrong
+    if (this.value !== quizQuestions[curQuestionIndex].correctAnswer) {
+        // remove time
+        time -= 10;
+
+        if (time < 0) {
+            time = 0;
+        }
+
+        // display new time on page
+        lblTimer.innerHTML = time;
+
+        // update answer label to inform user they are wrong
+        lblOutcome.innerHTML = "Wrong!";
+    } else {
+        // update answer label to inform user they are right
+        lblOutcome.innerHTML = "Correct!";
+    }
+
+    // grab next question
+    curQuestionIndex++;
+
+    // make sure there are more questions
+    if (curQuestionIndex == quizQuestions.length) {
+        gameOver();
+    } else {
+        popQuiz();
+    }
+}
+
+// end the quiz hurray
+function gameOver() {
+    // stop timer
+    clearInterval(timerVal);
+
+    // hide quiz "page" and show end page
+    pageEndQuiz.style.display = pageEndQuiz.style.display === "none" ? "flex" : "flex";
+
+    pageIntroSection.style.display = pageIntroSection.style.display === "flex" ? "none" : "none";
+    pageHighScores.style.display = pageHighScores.style.display === "flex" ? "none" : "none";
+    pageMainSection.style.display = pageMainSection.style.display === "flex" ? "none" : "none";
+
+    //show final score
+    lblEndScore.innerHTML = "Your score is " + time + "!";
+}
+
+function saveScore() {
+    // find out what was typed in input box
+    var winnerName = txtInitials.value.trim();
+
+    // do some simple error checking
+    if (winnerName !== "") {
+        // get scores from local storage, set to empty if null
+        var bestScores = JSON.parse(window.localStorage.getItem("bestScores")) || [];
+
+        // formate new score as object for player
+        var newScore = {
+            score: time,
+            name: winnerName,
+        };
+
+        // add to local storage
+        bestScores.push(newScore);
+        window.localStorage.setItem("bestScores", JSON.stringify(bestScores));
+
+        showScores();
+    }
+}
+
+function goHome() {
+    // the great reset begins
+
+    // clear initials from win box
+    txtInitials.value = "";
+
+    // clear last score from label
+    lblEndScore.innerHTML = "";
+
+    // clear outcome from label
+    lblOutcome.innerHTML = "";
+
+    // hide timer
+    lblTimer.innerHTML = "";
+
+    // re-enable high scores button
+    btnHighScore.disabled = false;
+
+    // clear score box
+    listHighScores.innerText = "";
+
+    // re-show timer box
+    boxTimer.style.display = boxTimer.style.display == "flex" ? "none" : "none";
+
+    // reset all page visibility
+    pageIntroSection.style.display = pageIntroSection.style.display === "none" ? "flex" : "flex";
+    pageHighScores.style.display = pageHighScores.style.display === "flex" ? "none" : "none";
+    pageEndQuiz.style.display = pageEndQuiz.style.display === "flex" ? "none" : "none";
+    pageMainSection.style.display = pageMainSection.style.display === "flex" ? "none" : "none";
 
 }
 
-//add event listeners for all these buttons
+function showScores() {
+    //show page
+    pageEndQuiz.style.display = pageEndQuiz.style.display === "flex" ? "none" : "none";
+    pageHighScores.style.display = pageHighScores.style.display === "none" ? "flex" : "flex";
+    pageIntroSection.style.display = pageIntroSection.style.display === "flex" ? "none" : "none";
+    pageMainSection.style.display = pageMainSection.style.display === "flex" ? "none" : "none";
+
+    // get scores from local storage or set to empty
+    var bestScores = JSON.parse(window.localStorage.getItem("bestScores")) || [];
+
+    // sort high scores by score property
+    bestScores.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    bestScores.forEach(function (score) {
+        // create list entry for each high score
+        var listEntry = document.createElement("li");
+        listEntry.textContent = score.name + " - " + score.score;
+
+        // display on page
+        listHighScores.appendChild(listEntry);
+    });
+}
+
+function nukeScores() {
+    var beCertain = window.confirm(
+        "Are you sure you want to remove high scores?  This will permanently remove your scores"
+    );
+    if (beCertain == true) {
+        window.localStorage.removeItem("bestScores");
+        window.location.reload();
+    }
+}
+
+// add event listeners for all these buttons
+// player clicks start quiz
 btnStartQuiz.addEventListener("click", startQuiz);
-/*
-btnHighScore.addEventListener('click',);
-btnAnswer1.addEventListener('click',);
-btnAnswer2.addEventListener('click',);
-btnAnswer3.addEventListener('click',);
-btnAnswer4.addEventListener('click',);
-btnInitialsSubmit.addEventListener('click');
-btnHome.addEventListener('click',)
-btnClear.addEventListener('click',)
-*/
+btnInitialsSubmit.addEventListener("click", saveScore);
+btnHome.addEventListener("click", goHome);
+btnClear.addEventListener("click", nukeScores);
+btnHighScore.addEventListener("click", showScores);

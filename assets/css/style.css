@@ -100,7 +100,7 @@ main section div {
     text-align: center;  
 }
 
-.button-format:hover {
+.button-format:hover, .question-buttons:hover {
     background-color: var(--button-hover-color);   
 }
 
@@ -120,8 +120,18 @@ main section div {
     color: whitesmoke; 
 }
 
-#ans1, #ans2, #ans3, #ans4 {
-    width: 80%;
+.question-buttons {
+    width: 60%;
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 22px;
+    line-height: 22px;
+    color: whitesmoke; 
+    margin: 16px 16px 16px 20px;
+    padding: 14px 34px;
+    cursor: pointer;
+    text-align: left;  
 }
 
 /* end button formatting */
