@@ -40,7 +40,7 @@ nav {
   margin-right: 2.5vw;
 }
 
-nav aside {
+nav aside, nav p {
   font-size: 24px;
 }
 
@@ -77,7 +77,13 @@ main section div {
     padding: 6px 34px;
 }
 
-#btn-high-score:hover {
+#btn-high-score:disabled {
+    color: var(--body-text);
+    font-style: italic;
+    cursor: not-allowed;
+}
+
+#btn-high-score:hover:enabled {
     color: var(--link-hover-color);
 }
 
