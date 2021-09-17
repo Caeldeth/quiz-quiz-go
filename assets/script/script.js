@@ -202,15 +202,14 @@ function goHome() {
     // clear score box
     listHighScores.innerText = "";
 
-    // re-show timer box
-    boxTimer.style.display = boxTimer.style.display == "flex" ? "none" : "none";
-
     // reset all page visibility
     pageIntroSection.style.display = pageIntroSection.style.display === "none" ? "flex" : "flex";
     pageHighScores.style.display = pageHighScores.style.display === "flex" ? "none" : "none";
     pageEndQuiz.style.display = pageEndQuiz.style.display === "flex" ? "none" : "none";
     pageMainSection.style.display = pageMainSection.style.display === "flex" ? "none" : "none";
 
+    curQuestionIndex = 0;
+    time = quizQuestions.length * 15;
 }
 
 function showScores() {
