@@ -1,13 +1,10 @@
-# quiz-quiz-go
+
 # Quiz Quiz Go - Javascript Knowledge Check!
-<!--- 
-Add badges after complete
-![GitHub top language](https://img.shields.io/github/languages/top/caeldeth/fast-pass)
-![GitHub language count](https://img.shields.io/github/languages/count/caeldeth/fast-pass) 
--->
+[![GitHub top language](https://img.shields.io/github/languages/top/caeldeth/fast-pass)](https://img.shields.io/github/languages/top/caeldeth/quiz-quiz-go?style=plastic)
+[![GitHub language count](https://img.shields.io/github/languages/count/caeldeth/fast-pass) ](https://img.shields.io/github/languages/count/caeldeth/quiz-quiz-go?style=plastic)
 
 ## Purpose
-A small quiz to test how good you are with Javascript 
+A small trivia quiz on miscellaneous Javascript facts
 
 ## Built With
 * HTML
@@ -16,13 +13,8 @@ A small quiz to test how good you are with Javascript
 
 ## Website
 https://caeldeth.github.io/quiz-quiz-go/  
-<img src="assets/images/wow-owen.gif" alt="wow!" width=150/>
 
 ## Previews
-<!--
-add image previews after complete
-<img src="assets/images/fast-pass-true-mode.JPG" alt="dark mode" width=500/>
-<img src="assets/images/fast-pass-eye-bleach-mode.JPG" alt="dark mode" width=500/>
--->
+<img src="assets/images/preview.jpg" width=500/>
 
 
